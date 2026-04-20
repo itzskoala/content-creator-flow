@@ -62,6 +62,7 @@ source .venv/bin/activate
 ## Windows
 .venv\Scripts\activate
 
+##
 uv sync or pip install -r requirements.txt
 
 crewai run
