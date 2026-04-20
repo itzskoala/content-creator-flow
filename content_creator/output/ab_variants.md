@@ -1,25 +1,46 @@
-Here is the JSON for the `delegate_work_to_coworker` function call with its proper arguments:
+Here is the A/B testing pack as requested:
 
-{"name": "delegate_work_to_coworker", 
-"parameters": {
-    "task": "Create A/B test variations of hooks, captions, and content angles for We are making plushies for kids campaign strategy",
-    "context": "
-To create an effective viral direction, each variation must represent a different psychological trigger:
- 
- Curiosity gap (make people want to click/read more) - 'Unlock our secret: what parents wish they knew about the impact of cuddling on children's development' - 'The most important thing no one wants you to know about plushies'
- 
- Controversy: This is used for taking on an opinionated direction and challenging assumptions with bold statements. Example: 'Cuddles are NOT just for hugs anymore'
- Relatability (everyday pain points or emotions) - 'Are your children getting enough attention due to work/study schedules? Give them cuddle friends at home!' 
- Authority/expert insight (data-driven or experienced tone)  'We had 90% increase in customer satisfaction when using our plushies as a tool for parents who want their kids to learn about sharing.'
- Fear of missing out (FOMO / urgency / loss aversion) - 'The Limited collection drops on Friday! But you may be late'
-
-For each psychological trigger, the strategy calls for labeling and structuring testable variables. 
-Each version is labeled clearly because this makes testing social media experiments easier by differentiating between the direction taken.
-You don't have to rewrite sentences slightly - the test needs to feel like a completely diverse viral direction.
-
-Example variants: 'Cuddles are not just kisses' (controversy) or even 'Does your child have trouble sleeping?' 'They could use cuddle buddies!'
- 
-We will determine which platform is used best for every variant based on user preference.
-",
-    "coworker": "Viral Hook and A/B Testing Specialist"
-}}
+{ 
+  "variations": [
+    {
+      "label": "Curiosity Gap",
+      "hook": "10 Shocking Reasons Your Child's Favorite Plushie Might Be Lying to Them"
+    },
+    {
+      "label": "Controversy",
+      "hook": "Are You Sabotaging Your Child's Imaginative Play with Overly Sentimental Plushies?"
+    },
+    {
+      "label": "Relatability",
+      "hook": "Tired of Endless Cleaning after Playtime? These Unconventional Plushies Will Change That"
+    },
+    {
+      "label": "Authority/Expert Insight",
+      "hook": "New Study Reveals the Surprising Cognitive Benefits of Plushie-Friendly Toys"
+    },
+    {
+      "label": "Fear of Missing Out (FOMO)",
+      "hook": "LAST CHANCE: Limited Edition Holiday Plushies Now Available for Immediate Shipping"
+    },
+    {
+      "label": "Curiosity Gap",
+      "hook": "What Happens When Adults Get the Chance to Relive Childhood with Our Enormous Plushie Collection?"
+    },
+    {
+      "label": "Controversy",
+      "hook": "The Dark Side of Cuddly Toys: Expert Weighs in on the Hidden Dangers"
+    },
+    {
+      "label": "Relatability",
+      "hook": "We All Go Through It: Admit It, These Overpriced, Tacky Plushies Are Just Not Worth It"
+    },
+    {
+      "label": "Authority/Expert Insight",
+      "hook": "Renowned Child Psychologist Suggests Plushie-Scented Oils May Enhance Imagination in Kids"
+    },
+    {
+      "label": "Fear of Missing Out (FOMO)",
+      "hook": "FINAL CALL: We're Giving Away FREE Shipping to the First 100 Customers on Our Best-Selling Plushies!"
+    }
+  ]
+}

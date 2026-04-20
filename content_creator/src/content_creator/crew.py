@@ -13,9 +13,17 @@ from crewai import LLM
 search_tool = SearchTools()
 browser_tool = BrowserTools()
 
-ollama_llm = LLM(model="ollama/llama3.1", base_url="http://localhost:11434")
+#uses Ollama
+llm = LLM(
+    model="ollama/qwen2.5:14b",
+    base_url="http://localhost:11434"
+)
 
-
+# uses Gemini 
+# llm = LLM(
+#     model="gemini-1.5-flash-latest",
+#     temperature=0.8
+# )
 
 @CrewBase
 class ContentCreator():
@@ -33,7 +41,7 @@ class ContentCreator():
             config=self.agents_config['product_competitor_researcher'],  
             verbose=True,
             tools = [search_tool,browser_tool],
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -42,7 +50,7 @@ class ContentCreator():
             config=self.agents_config['strategy_planner'],  
             verbose=True,
             tools = [search_tool],
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -50,7 +58,7 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['creative_content_creator'],  
             verbose=True,
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -58,7 +66,7 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['senior_photographer'],  
             verbose=True,
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -66,7 +74,7 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['chief_creative_director'],  
             verbose=True,
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -74,7 +82,7 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['adapter'],  
             verbose=True,
-            llm=ollama_llm
+            llm=llm
         )
 
     @agent
@@ -82,7 +90,7 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['ab_variant_generator'],  
             verbose=True,
-            llm=ollama_llm
+            llm=llm
         )
 
     @task
@@ -140,18 +148,18 @@ class ContentCreator():
     def crew(self) -> Crew:
         """Creates the ContentCreator Crew """
 
-        manager = Agent(
-            config =self.agents_config['manager'],
-            allow_delegation = True,
-            verbose=True,
-            llm = ollama_llm,
-            max_iter=10
-        )
+        # manager = Agent(
+        #     config =self.agents_config['manager'],
+        #     allow_delegation = True,
+        #     verbose=True,
+        #     llm = llm,
+        #     max_iter=8
+        # )
 
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.hierarchical,
-            manager_agent= manager,
+            process=Process.sequential,
+            # manager_agent= manager,
             verbose=True    
         )

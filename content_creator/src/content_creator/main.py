@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import warnings
+from dotenv import load_dotenv
 
 from datetime import datetime
 
@@ -12,6 +13,9 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # crew locally, so refrain from adding unnecessary logic into this file.
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
+
+load_dotenv()
+
 
 def run():
     """
