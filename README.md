@@ -76,5 +76,12 @@ https://www.amazon.com/...
 Extra context:
 Premium kitten food focused on early development, brain health, and immune support.
 
+<img width="3024" height="1324" alt="image" src="https://github.com/user-attachments/assets/ffde030c-2a1a-4f44-a914-ff7581d854cf" />
+
+
+
+
+
+
 
 
