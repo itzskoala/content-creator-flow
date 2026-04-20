@@ -71,7 +71,7 @@ crewai run
 ## Example input
 
 Product URL:
-https://www.amazon.com/Science-Diet-Healthy-Development-Chicken/dp/B0040B9VXM/ref=ast_sto_dp_puis?rdc=1&th=1
+https://www.amazon.com/...
 
 Extra context:
 Premium kitten food focused on early development, brain health, and immune support.
