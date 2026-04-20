@@ -13,14 +13,16 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
-def run(product_website, product_details):
+def run():
     """
     Run the crew.
     """
-   
+    product_website = input("Enter the product website URL: \n")
+    product_details = input("Any extra details about the product and or the content you're creating: \n")
     inputs = {
         'topic': product_details,
         'product_website': product_website,
+        'product_details': product_details,
         'current_year': str(datetime.now().year)
     }
 
@@ -35,10 +37,7 @@ def run(product_website, product_details):
     except Exception as e:
         raise Exception(f"An error occurred while running the crew: {e}")
 
-
-    
 if __name__ == "__main__":
-    product_website = input("Enter the product website URL: \n")
-    product_details = input("Any extra details about the product and or the content you're creating: \n")
-    run(product_website, product_details)
+ 
+    run()
 

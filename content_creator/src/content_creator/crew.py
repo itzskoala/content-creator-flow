@@ -2,14 +2,27 @@ from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
 from crewai.agents.agent_builder.base_agent import BaseAgent
 from crewai_tools import SerperDevTool
+from content_creator.tools.browser_tools import BrowserTools
+from content_creator.tools.search_tools import SearchTools
+from crewai import LLM
 
-agents_config = 'config/agents.yaml'
-tasks_config = 'config/tasks.yaml'
+
+
+
+
+search_tool = SearchTools()
+browser_tool = BrowserTools()
+
+ollama_llm = LLM(model="ollama/llama3.1", base_url="http://localhost:11434")
+
 
 
 @CrewBase
 class ContentCreator():
     """ContentCreator crew"""
+
+    agents_config = 'config/agents.yaml'
+    tasks_config = 'config/tasks.yaml'
 
     agents: list[BaseAgent]
     tasks: list[Task]
@@ -19,49 +32,57 @@ class ContentCreator():
         return Agent(
             config=self.agents_config['product_competitor_researcher'],  
             verbose=True,
-            tools = [SerperDevTool()]
+            tools = [search_tool,browser_tool],
+            llm=ollama_llm
         )
 
     @agent
     def strategy_planner(self) -> Agent:
         return Agent(
             config=self.agents_config['strategy_planner'],  
-            verbose=True
+            verbose=True,
+            tools = [search_tool],
+            llm=ollama_llm
         )
 
     @agent
     def creative_content_creator(self) -> Agent:
         return Agent(
             config=self.agents_config['creative_content_creator'],  
-            verbose=True
+            verbose=True,
+            llm=ollama_llm
         )
 
     @agent
     def senior_photographer(self) -> Agent:
         return Agent(
             config=self.agents_config['senior_photographer'],  
-            verbose=True
+            verbose=True,
+            llm=ollama_llm
         )
 
     @agent
     def chief_creative_director(self) -> Agent:
         return Agent(
             config=self.agents_config['chief_creative_director'],  
-            verbose=True
+            verbose=True,
+            llm=ollama_llm
         )
 
     @agent
     def adapter(self) -> Agent:
         return Agent(
             config=self.agents_config['adapter'],  
-            verbose=True
+            verbose=True,
+            llm=ollama_llm
         )
 
     @agent
     def ab_variant_generator(self) -> Agent:
         return Agent(
             config=self.agents_config['ab_variant_generator'],  
-            verbose=True
+            verbose=True,
+            llm=ollama_llm
         )
 
     @task
@@ -83,16 +104,18 @@ class ContentCreator():
         )
 
     @task
-    def ab_variant_task(self) -> Task:
-        return Task(
-            config=self.tasks_config['ab_variant_task'],  
-        )
-
-    @task
     def write_copy(self) -> Task:
         return Task(
             config=self.tasks_config['write_copy'],  
         )
+    
+    @task
+    def ab_variant_task(self) -> Task:
+        return Task(
+            config=self.tasks_config['ab_variant_task'],  
+            tools = [search_tool]
+        )
+
 
     @task
     def take_photo(self) -> Task:
@@ -119,14 +142,16 @@ class ContentCreator():
 
         manager = Agent(
             config =self.agents_config['manager'],
-            allow_delegation = True
-            verbose=True
+            allow_delegation = True,
+            verbose=True,
+            llm = ollama_llm,
+            max_iter=10
         )
 
         return Crew(
             agents=self.agents,
             tasks=self.tasks,
-            process=Process.hierarchical
-            manager_agent= manager
+            process=Process.hierarchical,
+            manager_agent= manager,
             verbose=True    
         )
