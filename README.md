@@ -52,6 +52,7 @@ This project uses a **sequential multi-agent pipeline**:
 ## Setup
 
 git clone https://github.com/itzskoala/content-creator-flow.git
+
 cd content-creator-flow
 
 python -m venv .venv
