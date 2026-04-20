@@ -1,0 +1,248 @@
+tasks:
+
+  website_analysis:
+    description: >
+      Analyze the product website provided in {product_website}, using additional user context:
+      {product_details}.
+
+      Evaluate:
+      - What the product is truly selling (not just surface messaging)
+      - Messaging clarity and consistency
+      - UX flow and friction points in the user journey
+      - Branding consistency and trust signals
+      - Conversion effectiveness (CTAs, landing structure, clarity)
+
+      Think like a senior growth marketer auditing a high-budget conversion funnel.
+    expected_output: >
+      A structured UX + messaging audit including:
+      - First Impression Breakdown (5-second clarity test)
+      - Value Proposition clarity score (1-10)
+      - UX friction points (step-by-step user journey issues)
+      - Messaging gaps (missing or unclear positioning)
+      - Conversion blockers
+      - Quick-win optimization recommendations
+    agent: product_competitor_researcher
+    output_file: output/website_analysis.md
+
+
+  market_anaysis:
+    description: >
+      Perform competitor and market analysis for {topic}, using insights from website_analysis.
+
+      Identify:
+      - Direct and indirect competitors
+      - Market positioning patterns
+      - Content and messaging gaps in the niche
+      - Viral content trends in this industry
+      - Emotional triggers competitors rely on (fear, status, convenience, etc.)
+
+      Focus on opportunities for differentiation and virality.
+    expected_output: >
+      Market intelligence report including:
+      - Top competitors with positioning breakdown
+      - Key market trends
+      - Content gaps competitors are missing
+      - Emotional angles used in the market
+      - Strategic positioning opportunities
+    agent: product_competitor_researcher
+    context:
+      - website_analysis
+    output_file: output/market_analysis.md
+
+
+  campaign_develpoment:
+    description: >
+      Using website_analysis and market_anaysis, develop a viral content campaign strategy for {topic}.
+
+      Define:
+      - Target audience personas (psychographic-driven)
+      - Emotional triggers for engagement
+      - Content angles (educational, controversial, relatable, aspirational, etc.)
+      - Platform-specific strategy (TikTok, Instagram, LinkedIn, YouTube)
+      - Viral mechanics (why content will spread)
+
+      Think like a top-tier creative strategist designing a multi-platform campaign.
+    expected_output: >
+      Campaign blueprint including:
+      - 2-3 audience personas
+      - Core emotional drivers
+      - 5-10 content angles
+      - Platform-specific strategy breakdown
+      - Viral hooks/themes
+    agent: strategy_planner
+    context:
+      - website_analysis
+      - market_anaysis
+    output_file: output/campaign_strategy.md
+
+
+  write_copy:
+    description: >
+      Create high-performing social media posts based on campaign_develpoment.
+
+      Each post must include:
+      - Strong hook (scroll-stopping first line)
+      - Emotional or storytelling-driven body
+      - Clear CTA (comment, share, save, click)
+
+      Vary each post:
+      - Relatable storytelling
+      - Authority/expert tone
+      - Controversial/opinionated angle
+      - Curiosity-driven hook
+
+      Each post should feel like a distinct viral experiment.
+    expected_output: >
+      4-8 social media posts including:
+      - Hook
+      - Body
+      - CTA
+    agent: creative_content_creator
+    context:
+      - campaign_develpoment
+    output_file: output/social_posts.md
+
+
+  take_photo:
+    description: >
+      Create detailed viral visual concepts that match the written copy and campaign strategy.
+
+      Each concept must include:
+      - Scene composition (what is in the frame)
+      - Subject (who/what is shown)
+      - Emotion being conveyed
+      - Lighting style
+      - Camera angle and framing
+      - Platform optimization (TikTok vertical, IG carousel, LinkedIn clean, etc.)
+
+      You must write like a real photographer directing a shoot.
+
+      Example concepts:
+      1. A stressed creator at 2AM in a dark room, laptop glowing, empty coffee cups,
+         blue cinematic lighting, shot slightly above to emphasize burnout.
+
+      2. Split-screen: left side messy startup chaos, right side polished success office,
+         strong red vs green contrast, corporate vs failure comparison.
+
+      3. Close-up of a phone showing “3 likes” on a post, hand hovering over it,
+         soft lighting, shallow depth of field, emotional disappointment focus.
+    expected_output: >
+      5-10 fully detailed visual concepts including:
+      - Scene breakdown
+      - Emotional intent
+      - Composition + lighting details
+      - Platform adaptation notes
+    agent: senior_photographer
+    context:
+      - write_copy
+      - campaign_develpoment
+    output_file: output/photo_concepts.md
+
+
+  approval_photo:
+    description: >
+      Review all generated photo concepts like a Chief Creative Director.
+
+      Evaluate:
+      - Emotional clarity (does it feel instantly impactful?)
+      - Viral potential (would it stop scrolling?)
+      - Alignment with campaign strategy and copy
+      - Visual uniqueness (avoid generic stock-photo energy)
+
+      Reject weak concepts and request revisions if needed.
+    expected_output: >
+      Final approved visual package including:
+      - Approved concepts
+      - Rejected concepts with reasoning
+      - Revision requests (if needed)
+      - Final creative direction summary
+    agent: chief_creative_director
+    context:
+      - take_photo
+      - write_copy
+      - campaign_develpoment
+    output_file: output/approved_photos.md
+
+  ab_variant_task:
+    description: >
+      Using the campaign strategy from campaign_develpoment, generate multiple A/B test variations
+      of hooks, captions, and content angles for {topic}.
+
+      Each variation must represent a different psychological trigger:
+
+      - Curiosity gap (make people want to click/read more)
+      - Controversy (challenge a belief or assumption)
+      - Relatability (everyday pain points or emotions)
+      - Authority/expert insight (data-driven or experienced tone)
+      - Fear of missing out (FOMO / urgency / loss aversion)
+
+      Each variant must be clearly labeled and structured so it can be tested independently
+      in social media experiments.
+
+      Avoid minor rewrites — each version must feel like a completely different viral direction.
+    expected_output: >
+      A structured A/B testing pack including:
+      - 5-10 distinct hook variations
+      - Each labeled by psychological strategy
+      - Optional caption/body direction for each hook
+      - Suggested best-use platform (TikTok, LinkedIn, Instagram, etc.)
+    agent: ab_variant_generator
+    context:
+      - campaign_develpoment
+      - write_copy
+    output_file: output/ab_variants.md
+
+
+adapter_task:
+  description: >
+    Adapt the generated social media content and A/B variants into platform-optimized versions
+    for LinkedIn, Instagram, TikTok, Facebook, and YouTube.
+
+    You must:
+    - Adjust tone for each platform (professional vs casual vs viral)
+    - Reformat structure (line breaks, emojis, captions, hooks)
+    - Add platform-specific hashtag strategies
+    - Optimize for algorithm behavior (retention, engagement, watch time)
+    - Ensure each platform version feels native, not copied
+
+    Use inputs from:
+    - write_copy (base posts)
+    - ab_variant_task (hook variations)
+    - campaign_develpoment (strategy and positioning)
+
+    Think like a growth marketer optimizing the same message across 5 algorithms.
+  expected_output: >
+    A platform-specific content package including:
+
+    LinkedIn:
+    - 1-2 professional, insight-driven posts
+    - Minimal hashtags, strong storytelling or authority tone
+
+    Instagram:
+    - Highly engaging caption formats
+    - Emoji usage + hashtag clusters
+    - Short-form viral-friendly structure
+
+    TikTok:
+    - Hook-first scripts
+    - Short punchy captions
+    - Retention-optimized phrasing
+
+    Facebook:
+    - Conversational, community-driven tone
+    - Story-heavy formatting
+
+    YouTube (Shorts or Community):
+    - Title-style hooks
+    - Engagement-driven phrasing
+
+    Each platform section must clearly show:
+    - Adapted post
+    - Hook variant used
+    - Why it fits the platform
+  agent: adapter
+  context:
+    - write_copy
+    - ab_variant_task
+    - campaign_develpoment
+  output_file: output/platform_adapted_content.md
