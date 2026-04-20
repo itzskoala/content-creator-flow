@@ -56,10 +56,10 @@ cd content-creator-flow
 
 python -m venv .venv
 
-# Mac/Linux
+## Mac/Linux
 source .venv/bin/activate
 
-# Windows
+## Windows
 .venv\Scripts\activate
 
 uv sync or pip install -r requirements.txt
